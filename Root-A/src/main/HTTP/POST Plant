@@ -1,0 +1,10 @@
+POST http://localhost:8080/api/plants
+Content-Type: application/json
+
+{
+  "name": "Monstera",
+  "species": "Monstera deliciosa",
+  "description": "Kitchen window"
+}
+
+###

@@ -1,0 +1,15 @@
+POST http://localhost:8080/api/sensors
+Content-Type: application/json
+
+{
+  "name": "Moisture probe",
+  "type": "SOIL_MOISTURE",
+  "description": "Vochtigheid sensor",
+  "version": "v1.0",
+  "plant": {
+    "id": 1
+  }
+}
+
+
+###
