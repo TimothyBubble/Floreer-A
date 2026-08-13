@@ -1,0 +1,14 @@
+# Maven build output
+target/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Application secrets
+application.properties
