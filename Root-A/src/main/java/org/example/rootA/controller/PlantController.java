@@ -1,7 +1,10 @@
 package org.example.rootA.controller;
 
+import jakarta.validation.Valid;
 import org.example.rootA.model.Plant;
 import org.example.rootA.repository.PlantRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +25,8 @@ public class PlantController {
     }
 
     @PostMapping
-    public Plant createPlant(@RequestBody Plant plant) {
-        return plantRepository.save(plant);
+    public ResponseEntity<Plant> createPlant(@Valid @RequestBody Plant plant) {
+        Plant saved = plantRepository.save(plant);
+        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 }
