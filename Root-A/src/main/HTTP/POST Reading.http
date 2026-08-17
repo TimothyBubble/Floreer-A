@@ -1,0 +1,9 @@
+POST http://localhost:8080/api/readings
+Content-Type: application/json
+
+{
+  "value": 60.0,
+  "timeStamp": "2026-08-15T10:00:00Z",
+  "sensor": { "id": 1 },
+  "plant": { "id": 1 }
+}

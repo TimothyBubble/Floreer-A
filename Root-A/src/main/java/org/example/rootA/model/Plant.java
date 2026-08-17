@@ -21,6 +21,7 @@ public class Plant {
 
     private String species;
     private String description;
+    private boolean needsWater;
 
     @NotNull
     private Instant createdAt;
@@ -32,6 +33,7 @@ public class Plant {
         this.name = name;
         this.species = species;
         this.description = description;
+        this.needsWater = false;
         this.createdAt = Instant.now();
     }
 
@@ -66,6 +68,10 @@ public class Plant {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public boolean isNeedsWater() { return needsWater; }
+
+    public void setNeedsWater(boolean needsWater) { this.needsWater = needsWater; }
 
     public Instant getCreatedAt() {
         return createdAt;
