@@ -32,9 +32,14 @@ public class ReadingController {
     public ResponseEntity<Reading> createReading(@Valid @RequestBody Reading reading) {
         Reading saved = readingRepository.save(reading);
 
+        List<Reading> recentReadings = readingRepository.findTop5ByPlantIdOrderByTimeStampDesc(saved.getPlant().getId());
+
+        boolean allDry = recentReadings.stream()
+                .allMatch(r -> r.getValue() < 30.0);
+
         Plant plant = plantRepository.findById(saved.getPlant().getId())
                 .orElseThrow(() -> new RuntimeException("Plant not found"));
-        plant.setNeedsWater(saved.getValue() < 30.0);
+        plant.setNeedsWater(allDry);
         plantRepository.save(plant);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
