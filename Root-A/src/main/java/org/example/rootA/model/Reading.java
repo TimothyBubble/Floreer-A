@@ -2,9 +2,13 @@ package org.example.rootA.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.Instant;
 
+@Getter
+@Setter
 @Entity
 public class Reading {
 
@@ -32,46 +36,6 @@ public class Reading {
         this.value = value;
         this.timeStamp = timeStamp;
         this.sensor = sensor;
-        this.plant = plant;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Double getValue() {
-        return value;
-    }
-
-    public void setValue(Double value) {
-        this.value = value;
-    }
-
-    public Instant getTimeStamp() {
-        return timeStamp;
-    }
-
-    public void setTimeStamp(Instant timeStamp) {
-        this.timeStamp = timeStamp;
-    }
-
-    public Sensor getSensor() {
-        return sensor;
-    }
-
-    public void setSensor(Sensor sensor) {
-        this.sensor = sensor;
-    }
-
-    public Plant getPlant() {
-        return plant;
-    }
-
-    public void setPlant(Plant plant) {
         this.plant = plant;
     }
 }

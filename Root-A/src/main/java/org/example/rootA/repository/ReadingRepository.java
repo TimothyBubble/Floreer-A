@@ -9,5 +9,5 @@ public interface ReadingRepository extends JpaRepository<Reading, Long> {
 
     List<Reading> findTop5ByPlantIdOrderByTimeStampDesc(Long plantId);
 
-    List<Reading> findByPlantIdOrderByTimeStampDesc(Long plantId);
+    //List<Reading> findByPlantIdOrderByTimeStampDesc(Long plantId);
 }

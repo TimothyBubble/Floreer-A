@@ -42,6 +42,7 @@ public class ReadingController {
         plant.setNeedsWater(allDry);
         plantRepository.save(plant);
 
+        saved.setPlant(plant);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
