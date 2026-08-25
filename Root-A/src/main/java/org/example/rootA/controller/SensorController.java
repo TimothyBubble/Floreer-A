@@ -19,6 +19,13 @@ public class SensorController {
         this.sensorRepository = sensorRepository;
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Sensor> getSensor(@PathVariable Long id) {
+        return sensorRepository.findById(id)
+                .map(sensor -> ResponseEntity.ok(sensor))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @GetMapping
     public List<Sensor> getAllSensors() {
         return sensorRepository.findAll();

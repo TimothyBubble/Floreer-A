@@ -23,6 +23,13 @@ public class ReadingController {
         this.plantRepository = plantRepository;
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Reading> getReading(@PathVariable Long id) {
+        return readingRepository.findById(id)
+                .map(reading -> ResponseEntity.ok(reading))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @GetMapping
     public List<Reading> getAllReadings() {
         return readingRepository.findAll();

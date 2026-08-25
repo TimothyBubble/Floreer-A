@@ -19,6 +19,13 @@ public class PlantController {
         this.plantRepository = plantRepository;
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Plant> getPlant(@PathVariable Long id) {
+        return plantRepository.findById(id)
+                .map(plant -> ResponseEntity.ok(plant))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @GetMapping
     public List<Plant> getAllPlants() {
         return plantRepository.findAll();
@@ -28,5 +35,11 @@ public class PlantController {
     public ResponseEntity<Plant> createPlant(@Valid @RequestBody Plant plant) {
         Plant saved = plantRepository.save(plant);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePlant(@PathVariable Long id) {
+        plantRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
