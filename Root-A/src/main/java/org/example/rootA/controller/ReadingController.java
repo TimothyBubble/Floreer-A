@@ -5,6 +5,7 @@ import org.example.rootA.model.Plant;
 import org.example.rootA.model.Reading;
 import org.example.rootA.repository.ReadingRepository;
 import org.example.rootA.repository.PlantRepository;
+import org.example.rootA.service.WateringLogicService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,10 +18,12 @@ public class ReadingController {
 
     private final ReadingRepository readingRepository;
     private final PlantRepository plantRepository;
+    private final WateringLogicService wateringLogicService;
 
-    public ReadingController(ReadingRepository readingRepository, PlantRepository plantRepository) {
+    public ReadingController(ReadingRepository readingRepository, PlantRepository plantRepository, WateringLogicService wateringLogicService) {
         this.readingRepository = readingRepository;
         this.plantRepository = plantRepository;
+        this.wateringLogicService = wateringLogicService;
     }
 
     @GetMapping("/{id}")
@@ -41,8 +44,7 @@ public class ReadingController {
 
         List<Reading> recentReadings = readingRepository.findTop5ByPlantIdOrderByTimeStampDesc(saved.getPlant().getId());
 
-        boolean allDry = recentReadings.stream()
-                .allMatch(r -> r.getValue() < 30.0);
+        boolean allDry = wateringLogicService.needsWater(recentReadings);
 
         Plant plant = plantRepository.findById(saved.getPlant().getId())
                 .orElseThrow(() -> new RuntimeException("Plant not found"));
