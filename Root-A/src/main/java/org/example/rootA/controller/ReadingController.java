@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @RestController
@@ -42,7 +44,9 @@ public class ReadingController {
     public ResponseEntity<Reading> createReading(@Valid @RequestBody Reading reading) {
         Reading saved = readingRepository.save(reading);
 
-        List<Reading> recentReadings = readingRepository.findTop5ByPlantIdOrderByTimeStampDesc(saved.getPlant().getId());
+        Instant cutoff = Instant.now().minus(5, ChronoUnit.MINUTES);
+
+        List<Reading> recentReadings = readingRepository.findByPlantIdAndTimeStampAfter(saved.getPlant().getId(), cutoff);
 
         boolean allDry = wateringLogicService.needsWater(recentReadings);
 

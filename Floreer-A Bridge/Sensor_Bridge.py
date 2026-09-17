@@ -7,7 +7,7 @@ import time
 SERIAL_PORT = "/dev/ttyACM0" # Linux/Pi serial port or "COMx" on Windows
 BAUD_RATE = 9600
 API_URL = "http://<your-ip>:8080/api/readings" # Input your machine's actual local IP
-SENSOR_ID = 4
+SENSOR_ID = 1
 PLANT_ID = 1
 
 ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=2)
