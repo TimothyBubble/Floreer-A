@@ -14,6 +14,7 @@ ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=2)
 time.sleep(2)  # gives the Arduino a moment to reset after opening the port
 
 while True:
+    ser.reset_input_buffer()
     line = ser.readline().decode("utf-8").strip()
     if line.isdigit():
         value = float(line)
